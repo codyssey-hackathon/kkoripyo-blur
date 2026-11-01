@@ -23,7 +23,21 @@
 | `setup_linux.sh` | ComfyUI, Florence-2 노드, 모델 설치 (한 번만 실행) |
 | `run_linux.sh` | ComfyUI와 블러 API를 함께 실행 |
 
-## 설치 (Linux + NVIDIA GPU)
+## 실행 방법 요약 (Docker, 권장)
+
+필요: NVIDIA GPU + 드라이버, Docker, NVIDIA Container Toolkit
+
+```bash
+git clone https://github.com/codyssey-hackathon/kkoripyo-blur.git
+cd kkoripyo-blur
+cp .env.example .env          # 환경설정 (API_KEY 등, 아래 표 참고)
+docker compose up -d --build  # 처음 실행 때 Florence-2 모델(약 1.5GB)을 받음
+curl http://localhost:8190/health   # {"server": "ok", "comfyui": "ok"}
+```
+
+꼬리표 백엔드([kkoripyo-be](https://github.com/codyssey-hackathon/kkoripyo-be))의 `BLUR_SERVER_URL`에 이 서버 주소를 넣으면 진단 결과의 "이 사진으로 교체하세요"에 쓰입니다.
+
+## 설치 (Linux + NVIDIA GPU, Docker 없이)
 
 필요한 것: Python 3.10 이상, git, curl, NVIDIA 드라이버
 
